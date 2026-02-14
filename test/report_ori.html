@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenCV vs Ruby Benchmark</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        th { background: #333; color: white; }
+        .pending { color: #999; font-style: italic; }
+        .data-cell { font-weight: bold; color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h2>Benchmark Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Datetime</th>
+                <th>Image</th>
+                <th>Image Size</th>
+                <th>Python (OpenCV)</th>
+                <th>Ruby (Contrek)</th>
+            </tr>
+        </thead>
+        <tbody id="report-body">
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,38 @@
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    ruby \
+    ruby-dev \
+    build-essential \
+    cmake \
+    python3-opencv \
+    python3-numpy \
+    python3-bs4 \
+    python3-lxml \
+    libvips-dev \
+    git \
+    imagemagick \
+    libmagickwand-dev \
+    pkg-config \
+    libgoogle-perftools-dev \
+    libopencv-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# zlib-ng
+RUN git clone https://github.com/zlib-ng/zlib-ng.git /tmp/zlib-ng && \
+    cd /tmp/zlib-ng && \
+    ./configure --zlib-compat && \
+    make -j$(nproc) && \
+    make install && \
+    rm -rf /tmp/zlib-ng
+
+ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+RUN ldconfig
+
+RUN gem install bundler --no-document
+
+WORKDIR /app
+
+CMD ["/bin/bash"]

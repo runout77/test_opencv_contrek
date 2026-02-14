@@ -1,0 +1,9 @@
+services:
+  test:
+    image: ubuntu:24.04
+    build:
+      context: .
+      dockerfile: ./DockerFile
+    volumes:
+      - .:/app
+
