@@ -10,4 +10,3 @@ mkdir build
 cd build
 cmake ..
 make -j
-./contrek_opencv_benchmark
