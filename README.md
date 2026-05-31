@@ -155,7 +155,7 @@ The following data was obtained in a virtualized environment (VMware Virtual Mac
 To ensure maximum accuracy, eliminate OS thread scheduling noise, and bypass transient caching effects, the benchmark is executed **11 consecutive times**.
 
 
-🌐 [Live report](./docs/multiple_runs.html)
+🌐 [Live report](https://raw.githack.com/runout77/test_opencv_contrek/main/docs/multiple_runs.html)
 
 ## 3. Advanced Techniques & Demonstration Tools
 
@@ -207,4 +207,4 @@ By default, the benchmark runs in **pure computation mode** to measure raw CPU p
 
 > *Note on viewing:* Due to the massive size of the generated vector file (~217k detailed polygons), it can be opened and viewed directly in Google Chrome, though you may experience occasional, temporary application freezes (locks).
 
-<center><img src="./docs/streaming_test.png" alt="Streaming" width="90%"/></center>
+<center><img src="./docs/streaming_test.jpg" alt="Streaming" width="90%"/></center>
