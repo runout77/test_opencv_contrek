@@ -94,10 +94,8 @@ void stream_png_image(const std::string& filepath, uint32_t stripe_height, bool 
       ProcessResult *result = polygon_finder.process_info();
       if (result) {
         std::cout << "stripe " << stripe_count << ": found polygons " << result->groups << std::endl;
-        ProcessResult* safe_result = result->clone();
-        result_clones.push_back(safe_result);
-        vmerger.add_tile(*safe_result);
-        delete result;
+        result_clones.push_back(result);
+        vmerger.add_tile(*result);
       }
       stripe_count++;
     }
