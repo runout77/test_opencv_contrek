@@ -9,7 +9,8 @@ mkdir -p "$REPO_ROOT/images"
 BASE_URL="https://github.com/runout77/test_opencv_contrek/releases/download/test-assets-v1"
 
 FILES=(
-    "test_81920x81920.png"
+    "test_81920x81920.png",
+    "high_complexity_81920x81920.png"
 )
 
 for FILE in "${FILES[@]}"; do

@@ -3,7 +3,6 @@ project(BenchmarkContour C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Flag globali (si applicano AUTOMATICAMENTE a tutti i target)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pthread -march=native -DNDEBUG -Ofast -flto -O3")
 
 include_directories(/usr/local/include)
@@ -18,8 +17,7 @@ else()
     message(FATAL_ERROR "OpenCV not found")
 endif()
 
-# --- GESTIONE DIPENDENZE COMUNI ---
-# Creiamo una lista di librerie a cui collegare entrambi gli eseguibili
+# common dependencies
 set(COMMON_LIBS ContrekLib ${OpenCV_LIBS} pthread)
 
 find_library(TCMALLOC_LIB tcmalloc)
@@ -38,10 +36,10 @@ else()
 endif()
 
 # =================================================================
-# DEFINIZIONE DEI TARGET (Ora bastano pochissime righe!)
+# TARGETS
 # =================================================================
 
-# 1. Target Benchmark Originale
+# 1. Target Original
 add_executable(contrek_opencv_benchmark test.cpp)
 target_include_directories(contrek_opencv_benchmark PRIVATE ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(contrek_opencv_benchmark PRIVATE ${COMMON_LIBS})
@@ -53,3 +51,11 @@ target_include_directories(streaming_benchmark PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/contrek_core
 )
 target_link_libraries(streaming_benchmark PRIVATE ${COMMON_LIBS})
+
+# 3. Target Progressive Streaming
+add_executable(progressive_streaming_benchmark progressive_streaming.cpp)
+target_include_directories(progressive_streaming_benchmark PRIVATE 
+    ${OpenCV_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/contrek_core
+)
+target_link_libraries(progressive_streaming_benchmark PRIVATE ${COMMON_LIBS})
