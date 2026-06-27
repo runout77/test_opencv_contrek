@@ -155,7 +155,7 @@ Topology statistics
 
 Performance
 - Compute time:        296,267 ms (296 s)
-- Peak RAM usage:      12.89 GB
+- Peak RAM usage:      4.3 GB
 
 Output
 - File:                streaming_buffer.svg
@@ -174,9 +174,9 @@ Only contours that remain topologically active across stripe boundaries are reta
 | ----------------------- | -------: | ---------: | ----: | -------: | ----------: |
 | 40960 × 40960           | 1.67 Gpx |    217,490 |  20 s |  3.16 GB |  560 MB SVG |
 | 81920 × 81920           | 6.71 Gpx |    869,932 |  94 s |    12 GB |  2.3 GB SVG |
-| 81920 × 81920 (high complexity) | 6.71 Gpx | 20,276,802 | 296 s | 12.89 GB | 7.22 GB SVG |
+| 81920 × 81920 (high complexity) | 6.71 Gpx | 20,276,802 | 296 s | 4.3 GB | 7.22 GB SVG |
 
-Despite producing more than **20 million polygons** and generating a **7.22 GB SVG**, memory usage remains bounded because intermediate contour results are merged, streamed to disk, and released immediately after processing each stripe.
+Despite producing more than **20 million polygons** and generating a **7.22 GB SVG**, memory usage remains extremely bounded because intermediate contour results are merged, streamed to disk, and released immediately after processing each stripe.
 
 
 <center><img src="./progressive_streaming_81920.jpg" alt="Streaming" width="70%"/></center>
