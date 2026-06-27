@@ -10,6 +10,8 @@
 #include "ContrekApi.h"
 #include "polygon/finder/concurrent/VerticalMerger.h"
 #include "polygon/finder/concurrent/StreamingMerger.h"
+#include "polygon/finder/concurrent/SvgStreamingMerger.h"
+#include "polygon/finder/concurrent/GeoJsonStreamingMerger.h"
 
 double get_peak_rss() {
   struct rusage r_usage;
@@ -65,8 +67,10 @@ void stream_progressive_png_image(const std::string& filepath, uint32_t stripe_h
     if (!shared_stream) {
       std::cerr << "Error: Unable creating output streaming file!" << std::endl;
     }
+    std::vector<char> buffer(4 * 1024 * 1024);  // Buffer (4MB)
+    shared_stream.rdbuf()->pubsetbuf(buffer.data(), buffer.size());
 
-    StreamingMerger vmerger(0, &varguments, &shared_stream, total_width, total_height);
+    SvgStreamingMerger vmerger(0, &varguments, &shared_stream, total_width, total_height);
     try {
       size_t row_size = static_cast<size_t>(total_width) * 4;
       int stripe_count = 0;
