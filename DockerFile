@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     ruby-dev \
     build-essential \
     cmake \
-    python3-opencv \
+    python3 \
     python3-numpy \
     python3-bs4 \
     python3-lxml \
@@ -17,8 +17,40 @@ RUN apt-get update && apt-get install -y \
     libmagickwand-dev \
     pkg-config \
     libgoogle-perftools-dev \
-    libopencv-dev \
+    libgtk-3-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libtiff-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
+    libtbb-dev \
+    libeigen3-dev \
+    wget \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Custom OpenCV build
+RUN git clone --branch 4.10.0 --depth 1 https://github.com/opencv/opencv.git /tmp/opencv && \
+    mkdir -p /tmp/opencv/build && \
+    cd /tmp/opencv/build && \
+    cmake .. \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_CXX_FLAGS="-O3 -Ofast -march=native -DNDEBUG -flto" \
+      -DCMAKE_C_FLAGS="-O3 -Ofast -march=native -DNDEBUG -flto" \
+      -DBUILD_TESTS=OFF \
+      -DBUILD_PERF_TESTS=OFF \
+      -DBUILD_EXAMPLES=OFF \
+      -DBUILD_opencv_python3=OFF \
+      -DWITH_TBB=ON \
+      -DWITH_OPENMP=ON \
+      -DCMAKE_INSTALL_PREFIX=/usr/local/opencv-custom && \
+    make -j$(nproc) && \
+    make install && \
+    rm -rf /tmp/opencv
+
+ENV OpenCV_DIR=/usr/local/opencv-custom/lib/cmake/opencv4
+ENV LD_LIBRARY_PATH=/usr/local/opencv-custom/lib:/usr/local/lib:$LD_LIBRARY_PATH
 
 # zlib-ng
 RUN git clone https://github.com/zlib-ng/zlib-ng.git /tmp/zlib-ng && \
@@ -28,7 +60,6 @@ RUN git clone https://github.com/zlib-ng/zlib-ng.git /tmp/zlib-ng && \
     make install && \
     rm -rf /tmp/zlib-ng
 
-ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 RUN ldconfig
 
 RUN gem install bundler --no-document

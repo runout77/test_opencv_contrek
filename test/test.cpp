@@ -46,6 +46,9 @@ double now_ms() {
 }
 
 int main(int argc, char* argv[]) {
+  std::cout << cv::getBuildInformation();
+  std::cout << CV_VERSION << std::endl;
+
   bool use_tree = false;
   for (int i = 1; i < argc; i++) {
     if (std::string(argv[i]) == "--tree") use_tree = true;

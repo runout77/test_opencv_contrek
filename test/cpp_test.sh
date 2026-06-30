@@ -8,5 +8,5 @@ rm -rf temp_repo
 
 mkdir build
 cd build
-cmake ..
+cmake .. -DOpenCV_DIR=/usr/local/opencv-custom/lib/cmake/opencv4
 make -j

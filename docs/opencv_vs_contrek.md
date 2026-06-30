@@ -3,7 +3,7 @@
 The entire system is containerized via Docker and offers two testing modalities:
 
 * **High-Level:** A comparison between the Contrek Ruby extension and OpenCV Python bindings using identical image sets.
-* **Low-Level (Native):** A direct C++ comparison to measure the raw efficiency of both processing engines.
+* **Low-Level (Native):** A direct C++ comparison to measure the raw efficiency of both processing engines. (OpenCV is compiled from source, version 4.10.0 in Release with -O3 -Ofast -march=native -flto -DNDEBUG flags)
 
 Configurations have been calibrated to ensure visually identical results: both engines extract external contours and holes with equivalent topological precision. Users can enable a visual validation flag to generate PNG images of the processed polygons, highlighting external boundaries in red and internal holes in green.
 
